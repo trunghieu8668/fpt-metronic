@@ -2,7 +2,7 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React, {useMemo} from "react";
 import {OverlayTrigger, Tooltip} from "react-bootstrap";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory  } from "react-router-dom";
 import {useSelector} from "react-redux";
 import objectPath from "object-path";
 import {useHtmlClassService} from "../../_core/MetronicLayout";
@@ -14,6 +14,8 @@ export function QuickUserToggler() {
   const { logout, events } = useReactOidc();
   const addUserEvent = user => console.log(`********* User Loaded :${user.profile} *********`);
   const uiService = useHtmlClassService();
+  const history = useHistory();
+
   const layoutProps = useMemo(() => {
     return {
       offcanvas: objectPath.get(uiService.config, "extras.user.layout") === "offcanvas",
@@ -48,7 +50,7 @@ export function QuickUserToggler() {
               </>
             </div>
       
-            <button onClick={()=> redirectLogin()} className="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
+            <button onClick={logout} className="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
               Đăng xuất
             </button>
           </div>

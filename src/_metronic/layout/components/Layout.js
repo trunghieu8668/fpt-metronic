@@ -13,7 +13,6 @@ import {QuickPanel} from "./extras/offcanvas/QuickPanel";
 import {QuickUser} from "./extras/offcanvas/QuickUser";
 import {ScrollTop} from "./extras/ScrollTop";
 import {StickyToolbar} from "./extras/StickyToolbar";
-import { AuthenticationProvider, oidcLog, InMemoryWebStorage } from '@axa-fr/react-oidc-context';
 import {oidcConfiguration} from '../../../configuration'
 
 export function Layout({ children }) {
@@ -36,12 +35,7 @@ export function Layout({ children }) {
     }, [uiService]);
 
     return layoutProps.selfLayout !== "blank" ? (
-      <AuthenticationProvider
-        configuration={oidcConfiguration}
-        loggerLevel={oidcLog.DEBUG}
-        isEnabled={true}
-        UserStore={InMemoryWebStorage}
-      >
+        <>
             {/*begin::Main*/}
             <HeaderMobile/>
             <div className="d-flex flex-column flex-root">
@@ -84,7 +78,7 @@ export function Layout({ children }) {
             <StickyToolbar/>
             {/*end::Main*/}
             <LayoutInit />
-        </AuthenticationProvider>
+        </>
     ) : (
         // BLANK LAYOUT
         <div className="d-flex flex-column flex-root">{children}</div>

@@ -8,7 +8,7 @@
 import React from "react";
 import { Redirect, Switch, Route } from "react-router-dom";
 import { shallowEqual, useSelector } from "react-redux";
-import { withOidcSecure, OidcSecure } from '@axa-fr/react-oidc-context';
+import { OidcSecure } from '@axa-fr/react-oidc-context';
 import {Layout} from "../_metronic/layout";
 import BasePage from "./BasePage";
 import { Logout, AuthPage } from "./modules/Auth";
@@ -24,6 +24,7 @@ export function Routes() {
 
     return (
         <Switch>
+          <OidcSecure>
             {!isAuthorized ? (
               /*Render auth page when user at `/auth` and not authorized.*/
               <Route>
@@ -46,6 +47,7 @@ export function Routes() {
                 <BasePage/>
               </Layout>
             )}
+          </OidcSecure>
         </Switch>
     );
 }
